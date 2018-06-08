@@ -10,13 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace XF.Recursos.Lista
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ClasseView : ContentPage
+	public partial class ListaCards : ContentPage
 	{
-		public ClasseView ()
+		public ListaCards ()
 		{
 			InitializeComponent ();
-
-            lstCursos.ItemsSource = Curso.GetListaDeCursos();
 		}
 	}
 }
