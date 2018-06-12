@@ -128,4 +128,10 @@
       <Name>XF.Recursos</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Engine.png" />
+  </ItemGroup>
 </Project>

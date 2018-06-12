@@ -75,5 +75,20 @@ namespace XF.Recursos
             await Navigation.PushAsync(new Lista.ListaCards());
         }
         #endregion
+
+        #region Menu
+        private async void btnMestre_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Menu.MainPage());
+        }
+
+        #endregion
+
+        #region Theme
+        private async void btnTemplate_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Theme.ThemeView());
+        }
+        #endregion
     }
 }
