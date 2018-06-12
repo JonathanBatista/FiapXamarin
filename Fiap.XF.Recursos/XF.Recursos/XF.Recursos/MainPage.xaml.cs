@@ -57,22 +57,23 @@ namespace XF.Recursos
         }
         #endregion
 
-
-        private async void btnListClasse_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Lista.ClasseView());
-        }
-
+        #region Lista
         private async void btnListSimples_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Lista.SimplesView());
         }
-
-        private async void btnListProdutos_Clicked(object sender, EventArgs e)
+        private async void btnListClasse_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Lista.ClasseView());
+        }
+        private async void btnProduto_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Lista.ProdutoView());
         }
-
-        
+        private async void btnListaCards_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Lista.ListaCards());
+        }
+        #endregion
     }
 }

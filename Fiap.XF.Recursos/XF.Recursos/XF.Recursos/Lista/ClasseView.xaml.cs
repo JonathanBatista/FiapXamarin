@@ -17,6 +17,7 @@ namespace XF.Recursos.Lista
 			InitializeComponent ();
 
             lstCursos.ItemsSource = Curso.GetListaDeCursos();
-		}
+
+        }
 	}
 }

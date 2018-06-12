@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace XF.Recursos.Lista
 {
@@ -19,6 +21,6 @@ namespace XF.Recursos.Lista
             lista.Add(new Curso() { Titulo = "Certificação TOGAF Nível 1", Unidade = "FIAP Aclimação" });
 
             return lista;
-        }
+        }        
     }
 }

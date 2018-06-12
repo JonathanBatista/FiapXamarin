@@ -3,28 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XF.Recursos.Lista.ProdutoView">
     <ContentPage.Content>
-        <Grid Margin="5" >
-            <Grid.RowDefinitions>
-                <RowDefinition  Height="Auto"/>
-                <RowDefinition  Height="*"/>
-            </Grid.RowDefinitions>
-
-            <StackLayout Grid.Row="0">
-                
+        <StackLayout Padding="5">
+            <StackLayout Padding="5" Spacing="2">
+                <SearchBar Placeholder="Pesquisar por produto" Text="{Binding PesquisaPorDescricao}" />
             </StackLayout>
-
-            <StackLayout Grid.Row="1">
-                <ListView x:Name="lstProduto" ItemsSource="{Binding Produtos}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label Text="{Binding Descricao}" Font="15" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-            
-        </Grid>
+            <ListView ItemsSource="{Binding Produtos}" ItemTapped="lstProduto_ItemTapped" 
+                      RowHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Descricao}" Style="{StaticResource LabelViewCellPai}" Margin="0,2,0,4" />
+                                <Label Text="{Binding Categoria}" Style="{StaticResource LabelViewCellFilho}" />
+                                <Label Text="{Binding Quantidade}" Style="{StaticResource LabelViewCellFilho}" />
+                                <Label Text="{Binding Preco}" Style="{StaticResource LabelViewCellFilho}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

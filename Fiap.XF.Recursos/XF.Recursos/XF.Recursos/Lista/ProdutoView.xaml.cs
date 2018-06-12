@@ -43,7 +43,7 @@ namespace XF.Recursos.Lista
                     Descricao = item.Element("descricao").Value,
                     Categoria = item.Element("categoria").Value,
                     Quantidade = int.Parse(item.Element("quantidade").Value),
-                    PrecoUnitario = decimal.Parse(item.Element("precounitario").Value)
+                    Preco = decimal.Parse(item.Element("precounitario").Value)
                 };
                 _vmProdutos.ProdutosFiltrado.Add(produto);
                 _vmProdutos.AplicarFiltro();
