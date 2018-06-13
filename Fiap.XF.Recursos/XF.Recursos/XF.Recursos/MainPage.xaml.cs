@@ -74,6 +74,10 @@ namespace XF.Recursos
         {
             await Navigation.PushAsync(new Lista.ListaCards());
         }
+        private async void btnEtiqueta_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Lista.ListaEtiquetaView());
+        }
         #endregion
 
         #region Menu

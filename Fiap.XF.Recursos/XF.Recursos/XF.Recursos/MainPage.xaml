@@ -24,6 +24,7 @@
                 <Button x:Name="btnListClasse" Text="Classe complexa" Clicked="btnListClasse_Clicked"></Button>
                 <Button x:Name="btnProduto" Text="Produto" Clicked="btnProduto_Clicked"></Button>
                 <Button x:Name="btnListaCards" Text="Cards" Clicked="btnListaCards_Clicked"></Button>
+                <Button x:Name="btnEtiqueta" Text="Etiqueta" Clicked="btnEtiqueta_Clicked"></Button>                
                 <Label FontSize="20" Text="Master/Details"></Label>
                 <Button x:Name="btnMestre" Text="Menu" Clicked="btnMestre_Clicked"></Button>
                 <Label FontSize="20" Text="TemplatedPage"></Label>
