@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XF.AplicativoFiap.App.Android", "XF.AplicativoFiap.App\XF.AplicativoFiap.App.Android\XF.AplicativoFiap.App.Android.csproj", "{FDFBEA6C-6C77-43DE-8DF5-A2FEDCE5FEB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XF.AplicativoFiap.App", "XF.AplicativoFiap.App\XF.AplicativoFiap.App\XF.AplicativoFiap.App.csproj", "{164DAC04-4ABF-4242-ACE7-0EF07C0803D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDFBEA6C-6C77-43DE-8DF5-A2FEDCE5FEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDFBEA6C-6C77-43DE-8DF5-A2FEDCE5FEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDFBEA6C-6C77-43DE-8DF5-A2FEDCE5FEB9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FDFBEA6C-6C77-43DE-8DF5-A2FEDCE5FEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDFBEA6C-6C77-43DE-8DF5-A2FEDCE5FEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDFBEA6C-6C77-43DE-8DF5-A2FEDCE5FEB9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{164DAC04-4ABF-4242-ACE7-0EF07C0803D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{164DAC04-4ABF-4242-ACE7-0EF07C0803D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{164DAC04-4ABF-4242-ACE7-0EF07C0803D5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{164DAC04-4ABF-4242-ACE7-0EF07C0803D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{164DAC04-4ABF-4242-ACE7-0EF07C0803D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{164DAC04-4ABF-4242-ACE7-0EF07C0803D5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D3DD358-0C4F-4CEA-AD63-5263B011AD45}
+	EndGlobalSection
+EndGlobal
