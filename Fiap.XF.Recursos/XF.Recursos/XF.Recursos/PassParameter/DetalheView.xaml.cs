@@ -8,10 +8,7 @@ namespace XF.Recursos.PassParameter
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetalheView : ContentPage
 	{
-		public DetalheView ()
-		{
-			InitializeComponent ();
-		}
+        public DetalheView() => InitializeComponent();
 
         private void btnVoltar_Clicked(object sender, EventArgs args)
         {

@@ -97,6 +97,11 @@ namespace XF.Recursos
             await Navigation.PushAsync(new PassParameter.HomeView(DateTime.Now.ToString("u")));
         }
 
+
+        private async void btnMC_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PassParameter.MCHomeView());
+        }
         #endregion
     }
 }
