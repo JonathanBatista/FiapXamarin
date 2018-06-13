@@ -90,5 +90,13 @@ namespace XF.Recursos
             await Navigation.PushAsync(new Theme.ThemeView());
         }
         #endregion
+
+        #region PassParameter
+        private async void btnHome_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PassParameter.HomeView(DateTime.Now.ToString("u")));
+        }
+
+        #endregion
     }
 }

@@ -28,6 +28,8 @@
                 <Button x:Name="btnMestre" Text="Menu" Clicked="btnMestre_Clicked"></Button>
                 <Label FontSize="20" Text="TemplatedPage"></Label>
                 <Button x:Name="btnTemplate" Text="TemplatedPage" Clicked="btnTemplate_Clicked"></Button>
+                <Label FontSize="20" Text="Passar parametro"></Label>
+                <Button x:Name="btnHome" Text="Home" Clicked="btnHome_Clicked"></Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
