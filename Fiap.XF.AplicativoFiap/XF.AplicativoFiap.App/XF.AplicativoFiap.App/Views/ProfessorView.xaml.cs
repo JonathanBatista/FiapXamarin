@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace XF.AplicativoFiap.App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProfessoresView : ContentPage
+	public partial class ProfessorView : ContentPage
 	{
-		public ProfessoresView ()
+		public ProfessorView ()
 		{
 			InitializeComponent ();
 		}
