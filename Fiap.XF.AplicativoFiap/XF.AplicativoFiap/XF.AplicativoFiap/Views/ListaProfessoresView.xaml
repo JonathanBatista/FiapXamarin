@@ -22,9 +22,9 @@
                                           Command="{Binding BindingContext.OnRemoverProfessorCmd, Source={x:Reference pageProfessores}}"
                                           CommandParameter="{Binding .}" />
 
-                                <MenuItem Text="Detalhes"
+                                <MenuItem Text="Editar"
                                           IsDestructive="True"
-                                          Command="{Binding BindingContext.OnProfessorDetalhesCmd, Source={x:Reference pageProfessores}}"
+                                          Command="{Binding BindingContext.OnEditarProfessorCmd, Source={x:Reference pageProfessores}}"
                                           CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
                             <Label Text="{Binding Nome}" />                       

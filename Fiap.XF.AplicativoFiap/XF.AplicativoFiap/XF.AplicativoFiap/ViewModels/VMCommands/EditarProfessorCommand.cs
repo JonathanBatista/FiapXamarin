@@ -21,7 +21,7 @@ namespace XF.AplicativoFiap.ViewModels.VMCommands
 
         public void Execute(object parameter)
         {
-            professorVM.EditarProfessor(parameter as Professor);
+            professorVM.EditarProfessorAtual(parameter as Professor);
         }
     }
 }

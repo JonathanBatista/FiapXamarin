@@ -7,7 +7,7 @@
             <Entry Placeholder="Nome" x:Name="txtNome" Text="{Binding ProfessorModel.Nome}"/>
             <Entry Placeholder="Titulo" x:Name="txtTitulo" Text="{Binding ProfessorModel.Titulo}"/>
             <StackLayout Orientation="Horizontal">
-                <Button Text="Adicionar" x:Name="btnSalvar"
+                <Button Text="Salvar" x:Name="btnSalvar"
                         Command="{Binding OnSalvarNovoProfessorCmd}"
                         CommandParameter="{Binding ProfessorModel}"/>
                 <Button Text="Cancelar" x:Name="btnCancelarNovo" Command="{Binding OnCancelarCmd}" />

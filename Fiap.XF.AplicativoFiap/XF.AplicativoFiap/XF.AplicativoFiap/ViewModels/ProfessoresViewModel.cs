@@ -24,7 +24,7 @@ namespace XF.AplicativoFiap.ViewModels
 
         public ICommand OnCancelarCmd { get; set; }
 
-        public DetalheProfessorCommand OnProfessorDetalhesCmd { get; private set; }
+        public EditarProfessorCommand OnEditarProfessorCmd { get; private set; }
 
         public RemoverProfessorCommand OnRemoverProfessorCmd { get; private set; }
 
@@ -46,7 +46,7 @@ namespace XF.AplicativoFiap.ViewModels
         {
             OnNovoProfessorCmd = new Command(OnNovoProfessor);
             OnCancelarCmd = new Command(OnCancelar);
-            OnProfessorDetalhesCmd = new DetalheProfessorCommand(this);
+            OnEditarProfessorCmd = new EditarProfessorCommand(this);
             OnRemoverProfessorCmd = new RemoverProfessorCommand(this);
             OnSalvarNovoProfessorCmd = new NovoProfessorCommad(this);            
         }
@@ -66,15 +66,6 @@ namespace XF.AplicativoFiap.ViewModels
         private async void OnCancelar()
         {
             await App.Current.MainPage.Navigation.PopAsync();
-        }
-
-        public async void VisualizarDetalhesProfessor(Professor professor)
-        {
-            await App.Current.MainPage.Navigation.PushAsync(
-                new ProfessorDetalheView()
-                {
-                    BindingContext = new ProfessoresViewModel(professor)
-                });
         }
 
         public async void EditarProfessorAtual(Professor professor)
@@ -104,17 +95,20 @@ namespace XF.AplicativoFiap.ViewModels
         {
             if (string.IsNullOrWhiteSpace(professor.Nome) || string.IsNullOrWhiteSpace(professor.Titulo))
             {
-                await Application.Current.MainPage.DisplayAlert("Alerta!", "Todos os campos são obrigatórios!", "OK");
+                await App.Current.MainPage.DisplayAlert("Alerta!", "Todos os campos são obrigatórios!", "OK");
                 return;
             }
 
+            // TODO: gerar um ID aletório com a data
             professor.Id = (int)((DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds / 516);
 
             var result = await ProfessorRepository.PostProfessorSqlAzureAsync(professor);
 
             if (result)
             {
-                await Application.Current.MainPage.Navigation.PopAsync();
+                await App.Current.MainPage.DisplayAlert("Sucesso!", "Professor adicionado com sucesso!", "Ok");
+                await App.Current.MainPage.Navigation.PopAsync();
+                return;
             }
         }
 
@@ -126,24 +120,42 @@ namespace XF.AplicativoFiap.ViewModels
                 return;
             }
 
-            await ProfessorRepository.PostProfessorSqlAzureAsync(professor);
+            var result = await ProfessorRepository.PutProfessorSqlAzureAsync(professor);
+
+            if (result)
+            {
+                await App.Current.MainPage.DisplayAlert("Sucesso!", "Professor editado com sucesso!", "Ok");
+                await App.Current.MainPage.Navigation.PopAsync();
+                return;
+            }
+
+            await App.Current.MainPage.DisplayAlert("Oops!", "Ocorreu um erro ao editar o professor!", "Ok");
         }
 
         public async void RemoverProfessor(Professor professorDeletado)
         {
-            // TODO: IMPLEMENTAR
-
             if (professorDeletado.Id == 0 || !(Professores.Any(x => x.Id == professorDeletado.Id)))
             {
                 await App.Current.MainPage.DisplayAlert("Ooops!", "O item selecionado p/ remoção não é válido!", "Ok");
                 return;
             }
-            var result = await ProfessorRepository.DeleteProfessorSqlAzureAsync(professorDeletado.Id.ToString());
 
-            if (result)
+            var confirm = await App.Current.MainPage.DisplayAlert("Você tem certeza?", "Após a confirmação esta ação não poderá ser desfeita!", "Sim, remova!", "Cancelar");
+
+            if (confirm)
             {
-                CarregarProfessores(true);
-            }
+                var result = await ProfessorRepository.DeleteProfessorSqlAzureAsync(professorDeletado.Id.ToString());
+
+                if (result)
+                {
+                    await App.Current.MainPage.DisplayAlert("Sucesso!", "Deletado com sucesso!", "Ok");
+
+                    CarregarProfessores(true);
+                    return;
+                }
+                else
+                    await App.Current.MainPage.DisplayAlert("Oops!", "Ocorreu um erro ao remover!", "Ok");
+            }            
         }
 
 

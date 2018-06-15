@@ -19,9 +19,6 @@
     <EmbeddedResource Update="Views\ListaProfessoresView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ProfessorDetalheView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\ProfessorView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

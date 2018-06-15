@@ -19,6 +19,9 @@ namespace XF.AplicativoFiap.ViewModels.VMCommands
         public void Execute(object parameter)
         {
             var prof = parameter as Professor;
+
+            if (prof.Id != 0)
+                professorVM.EditarProfessor(prof);
             
             professorVM.NovoProfessor(prof);
         } 
