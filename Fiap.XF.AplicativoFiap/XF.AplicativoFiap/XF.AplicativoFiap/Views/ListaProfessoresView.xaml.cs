@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.AplicativoFiap.ViewModels;
 
 namespace XF.AplicativoFiap.Views
 {
@@ -16,15 +17,16 @@ namespace XF.AplicativoFiap.Views
         public ListaProfessoresView ()
 		{
 			InitializeComponent ();
-            
-            
-		}
 
+            
 
-        // 
-        protected override bool OnBackButtonPressed()
-        {
-            return base.OnBackButtonPressed();
         }
+
+        protected override void OnAppearing()
+        {
+            var viewModel = (ProfessoresViewModel)BindingContext;
+            viewModel.CarregarProfessores(true);
+        }
+        
     }
 }

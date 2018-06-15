@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XF.AplicativoFiap.Views.ListaProfessoresView">
+             x:Class="XF.AplicativoFiap.Views.ListaProfessoresView"
+             x:Name="pageProfessores">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="NovoProfessorBtn" Text="Adicionar" Command="{Binding OnNovoProfessorCmd}" Order="Primary" Priority="1"/>
@@ -15,7 +16,18 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Remover"
+                                          IsDestructive="True"
+                                          Command="{Binding BindingContext.OnRemoverProfessorCmd, Source={x:Reference pageProfessores}}"
+                                          CommandParameter="{Binding .}" />
+
+                                <MenuItem Text="Detalhes"
+                                          IsDestructive="True"
+                                          Command="{Binding BindingContext.OnProfessorDetalhesCmd, Source={x:Reference pageProfessores}}"
+                                          CommandParameter="{Binding .}" />
+                            </ViewCell.ContextActions>
+                            <Label Text="{Binding Nome}" />                       
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -14,56 +14,77 @@ namespace XF.AplicativoFiap.Repositories
     {
         private static List<Professor> professoresSqlAzure;
 
-        public static async Task<List<Professor>> GetProfessoresSqlAzureAsync()
+        public static async Task<List<Professor>> GetProfessoresSqlAzureAsync(bool update)
         {
-            if (professoresSqlAzure != null)
+            if (professoresSqlAzure != null && !update)
                 return professoresSqlAzure;
-            var httpRequest = new HttpClient();
-            var stream = await httpRequest.GetStreamAsync("http://apiaplicativofiap.azurewebsites.net/api/professors");
-           
-            var professorSerializer = new DataContractJsonSerializer(typeof(List<Professor>));
+            
+            using (var httpRequest = new HttpClient())
+            {
+                var stream = await httpRequest.GetStreamAsync("http://apiaplicativofiap.azurewebsites.net/api/professors");
 
-            professoresSqlAzure = (List<Professor>) professorSerializer.ReadObject(stream);
+                var professorSerializer = new DataContractJsonSerializer(typeof(List<Professor>));
 
-            return professoresSqlAzure;
+                professoresSqlAzure = (List<Professor>)professorSerializer.ReadObject(stream);
+
+                return professoresSqlAzure;
+            }
+            
         }
 
         public static async Task<bool> PostProfessorSqlAzureAsync(Professor profAdd)
         {
-            if (profAdd == null)
-                return false;
-            var httpRequest = new HttpClient();
 
-            httpRequest.BaseAddress = new Uri("http://apiaplicativofiap.azurewebsites.net/");
-            httpRequest.DefaultRequestHeaders.Accept.Clear();
+            try
+            {
+                if (profAdd == null)
+                    return false;
 
-            httpRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string profJson = JsonConvert.SerializeObject(profAdd);
-            var response = await httpRequest.PostAsync("api/professors", 
-                                    new StringContent(profJson, Encoding.UTF8, "application/json"));
+                using (var httpRequest = new HttpClient())
+                {
+                    httpRequest.BaseAddress = new Uri("http://apiaplicativofiap.azurewebsites.net/");
+                    httpRequest.DefaultRequestHeaders.Accept.Clear();
 
-            if (response.IsSuccessStatusCode)
-                return true;
+                    httpRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    string profJson = JsonConvert.SerializeObject(profAdd);
+                    var response = await httpRequest.PostAsync("api/professors",
+                                            new StringContent(profJson, Encoding.UTF8, "application/json"));
 
-            return false;
+
+                    if (response.IsSuccessStatusCode)
+                        return true;
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+                      
         }
+
         public static async Task<bool> DeleteProfessorSqlAzureAsync(string profId)
         {
             if (string.IsNullOrWhiteSpace(profId))
                 return false;
+            
+            using (var httpRequest = new HttpClient())
+            {
+                httpRequest.BaseAddress = new Uri("http://apiaplicativofiap.azurewebsites.net/");
 
-            var httpRequest = new HttpClient();
-            httpRequest.BaseAddress = new Uri("http://apiaplicativofiap.azurewebsites.net/");
+                httpRequest.DefaultRequestHeaders.Accept.Clear();
 
-            httpRequest.DefaultRequestHeaders.Accept.Clear();
+                httpRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            httpRequest.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var response = await httpRequest.DeleteAsync(string.Format("api/professors/{0}", profId));
 
-            var response = await httpRequest.DeleteAsync(string.Format("api/professors/{0}", profId));
+                if (response.IsSuccessStatusCode)
+                    return true;
 
-            if (response.IsSuccessStatusCode)
-                return true;
-            return false;
+                return false;
+            }            
         }
     }
 }

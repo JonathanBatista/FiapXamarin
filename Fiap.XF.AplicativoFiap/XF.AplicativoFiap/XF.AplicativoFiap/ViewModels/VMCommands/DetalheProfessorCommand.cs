@@ -18,7 +18,7 @@ namespace XF.AplicativoFiap.ViewModels.VMCommands
 
         public void DetalheCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-        public bool CanExecute(object parameter) => (parameter != null);
+        public bool CanExecute(object parameter) => ((parameter != null) && ((Professor)parameter).Id != 0);
         public void Execute(object parameter)
         {
             var prof = parameter as Professor;

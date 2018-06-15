@@ -12,10 +12,15 @@ namespace XF.AplicativoFiap.ViewModels.VMCommands
 
         public event EventHandler CanExecuteChanged;
 
-        public void RemoverCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        public void NovoCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-        public bool CanExecute(object parameter) => (parameter != null);
+        public bool CanExecute(object parameter) => ((parameter != null)/* && (!string.IsNullOrWhiteSpace(((Professor)parameter).Nome))*/);
 
-        public void Execute(object parameter) => professorVM.NovoProfessor(parameter as Professor);
+        public void Execute(object parameter)
+        {
+            var prof = parameter as Professor;
+            
+            professorVM.NovoProfessor(prof);
+        } 
     }
 }

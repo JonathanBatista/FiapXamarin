@@ -4,7 +4,17 @@
     {
         public int Id { get; set; }
 
-        public string Nome { get; set; }
+        private string nome;
+
+        public string Nome
+        {
+            get { return nome; }
+            set
+            {
+                nome = value;
+                App.ProfessorVM.OnSalvarNovoProfessorCmd.NovoCanExecuteChanged();                
+            }
+        }
 
         public string Titulo { get; set; }
     }
