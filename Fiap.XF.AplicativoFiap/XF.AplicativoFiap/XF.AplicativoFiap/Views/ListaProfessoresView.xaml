@@ -27,7 +27,10 @@
                                           Command="{Binding BindingContext.OnEditarProfessorCmd, Source={x:Reference pageProfessores}}"
                                           CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
-                            <Label Text="{Binding Nome}" />                       
+                            <StackLayout>
+                                <Label Text="{Binding Nome}" />
+                                <Label Text="{Binding Titulo}" />
+                            </StackLayout>                            
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

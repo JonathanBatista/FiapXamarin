@@ -14,8 +14,6 @@ namespace XF.AplicativoFiap.ViewModels
 {
     public class ProfessoresViewModel : INotifyPropertyChanged
     {
-        private readonly ProfessorRepository _professorRepository = new ProfessorRepository();       
-
         public ObservableCollection<Professor> Professores { get; set; } = new ObservableCollection<Professor>();
 
         public Professor ProfessorModel { get; set; }
@@ -24,11 +22,11 @@ namespace XF.AplicativoFiap.ViewModels
 
         public ICommand OnCancelarCmd { get; set; }
 
-        public EditarProfessorCommand OnEditarProfessorCmd { get; private set; }
+        public EditarProfessorCommand OnEditarProfessorCmd { get; set; }
 
-        public RemoverProfessorCommand OnRemoverProfessorCmd { get; private set; }
+        public RemoverProfessorCommand OnRemoverProfessorCmd { get; set; }
 
-        public NovoProfessorCommad OnSalvarNovoProfessorCmd { get; private set; }
+        public NovoProfessorCommad OnSalvarNovoProfessorCmd { get; set; }
 
         public ProfessoresViewModel()
         {            
@@ -56,11 +54,9 @@ namespace XF.AplicativoFiap.ViewModels
 
         private async void OnNovoProfessor()
         {
+            ProfessorModel = new Professor();
             await App.Current.MainPage.Navigation.PushAsync(
-                new ProfessorView()
-                {
-                    BindingContext = new ProfessoresViewModel(new Professor())
-                });
+                                        new ProfessorView() { BindingContext = this });
         }
 
         private async void OnCancelar()
@@ -70,11 +66,9 @@ namespace XF.AplicativoFiap.ViewModels
 
         public async void EditarProfessorAtual(Professor professor)
         {
+            ProfessorModel = professor;
             await App.Current.MainPage.Navigation.PushAsync(
-                new ProfessorView()
-                {
-                    BindingContext = new ProfessoresViewModel(professor)
-                });
+                                        new ProfessorView() { BindingContext = this });
         }
         #endregion
 
