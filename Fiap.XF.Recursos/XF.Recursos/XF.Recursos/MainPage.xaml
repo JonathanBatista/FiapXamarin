@@ -32,6 +32,8 @@
                 <Label FontSize="20" Text="Passar parametro"></Label>
                 <Button x:Name="btnHome" Text="Home" Clicked="btnHome_Clicked"></Button>
                 <Button x:Name="btnMC" Text="Messaging Center" Clicked="btnMC_Clicked"></Button>
+                <Label FontSize="20" Text="Custom Control"></Label>
+                <Button x:Name="btnCustom" Text="Custom" Clicked="btnCustom_Clicked"></Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

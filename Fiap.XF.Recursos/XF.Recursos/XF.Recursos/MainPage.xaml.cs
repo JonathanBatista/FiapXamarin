@@ -107,5 +107,14 @@ namespace XF.Recursos
             await Navigation.PushAsync(new PassParameter.MCHomeView());
         }
         #endregion
+
+        #region Custom Renderer
+
+        private async void btnCustom_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CustomControl.CustomView());
+        }
+
+        #endregion
     }
 }
