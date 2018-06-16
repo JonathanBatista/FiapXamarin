@@ -90,6 +90,8 @@
   <ItemGroup>
     <Compile Include="FiapBoxViewRenderer.cs" />
     <Compile Include="FiapButtonRenderer.cs" />
+    <Compile Include="GeoLocation_iOS.cs" />
+    <Compile Include="Ligar_iOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -119,9 +121,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Xamarin.Mobile">
+      <HintPath>..\..\..\Compenentes\Xamarin.Mobile.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+    <PackageReference Include="xamstore-xamarin.mobile">
+      <Version>0.7.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

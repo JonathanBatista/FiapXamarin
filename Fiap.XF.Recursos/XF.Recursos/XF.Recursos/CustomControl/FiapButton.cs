@@ -4,7 +4,17 @@ using Xamarin.Forms.Xaml;
 
 namespace XF.Recursos.CustomControl
 {
-    public class FiapButton : Button { }
+    public class FiapButton : Button
+    {
+        public static readonly BindableProperty TextoProperty =
+            BindableProperty.Create<FiapButton, string>(p => p.Texto, default(string));
+
+        public string Texto
+        {
+            get { return (string)GetValue(TextoProperty); }
+            set { SetValue(TextoProperty, value); }
+        }
+    }
 
     public class ColorFromRGBExtension : IMarkupExtension
     {
@@ -28,6 +38,8 @@ namespace XF.Recursos.CustomControl
             get { return (Color)GetValue(CorDaBordaProperty); }
             set { SetValue(CorDaBordaProperty, value); }
         }
+
+
 
         public static readonly BindableProperty EspessuraDaBordaProperty =
             BindableProperty.Create<FiapBoxView, double>(p => p.EspessuraDaBorda, default(double));

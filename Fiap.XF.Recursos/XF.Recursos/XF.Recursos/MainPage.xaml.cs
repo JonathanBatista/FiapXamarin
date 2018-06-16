@@ -116,5 +116,20 @@ namespace XF.Recursos
         }
 
         #endregion
+
+        #region AppResources
+        private async void btnLigar_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new API.PhoneView());
+        }
+
+        private async void btnGps_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new GPS.CoordenadaView());
+        }
+        #endregion
+
+
+        
     }
 }

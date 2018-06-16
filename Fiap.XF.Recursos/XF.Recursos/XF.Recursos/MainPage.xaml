@@ -8,6 +8,10 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <Label FontSize="20" Text="GPS"></Label>
+                <Button x:Name="btnGps" Text="GPS" Clicked="btnGps_Clicked"></Button>
+                <Label FontSize="20" Text="Phone API"></Label>
+                <Button x:Name="btnLigar" Text="Telefone" Clicked="btnLigar_Clicked"></Button>
                 <Label FontSize="20" Text="Controles Básicos"></Label>
                 <Button x:Name="btnEditor" Text="Editor" Clicked="btnEditor_Clicked"></Button>
                 <Button x:Name="btnPicker" Text="List Picker" Clicked="btnPicker_Clicked"></Button>
