@@ -4,16 +4,21 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using XF.Contatos.ViewModels;
+using XF.Contatos.Views;
 
 namespace XF.Contatos
 {
 	public partial class App : Application
 	{
-		public App ()
+
+        public static ContatoViewModel ContatoVM { get; set; } 
+
+        public App ()
 		{
 			InitializeComponent();
-
-			MainPage = new XF.Contatos.MainPage();
+            ContatoVM = new ContatoViewModel();
+            MainPage = new NavigationPage(new ContatosView() { BindingContext = ContatoVM });
 		}
 
 		protected override void OnStart ()

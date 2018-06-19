@@ -4,8 +4,7 @@
              x:Class="XF.Contatos.Views.ContatosView">
     <ContentPage.Content>
         <ListView 
-            ItemsSource="{Binding ListaContatos}"
-            ItemTapped="{Binding ExibirContato}">
+            ItemsSource="{Binding ListaContatos}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

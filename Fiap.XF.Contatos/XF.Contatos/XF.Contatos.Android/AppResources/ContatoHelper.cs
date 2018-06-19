@@ -18,10 +18,7 @@ namespace XF.Contatos.Droid.AppResources
         {
             var context = MainApplication.CurrentContext as Activity;
             if (context == null) return false;
-
-
             var book = new AddressBook(context);
-            //         new AddressBook (this); on Android
 
             if (!await book.RequestPermission())
             {
@@ -29,20 +26,25 @@ namespace XF.Contatos.Droid.AppResources
                 return false;
             }
 
-            foreach (Contact contact in book.OrderBy(c => c.LastName))
-            {
-                Console.WriteLine("{0} {1}", contact.FirstName, contact.LastName);
-            }
-
+            publishList(book.ToList());
             return true;
         }
 
 
-        private void publishList(AddressBook currentBook)
+        private void publishList(List<Contact> contactList)
         {
-            // TODO: obter
+            var contatos = new List<Contato>();
 
-            MessagingCenter.Send<IContatoHelper, List<Contato>>(this, "obtercontatos", new List<Contato>());
+            foreach (var cont in contactList)
+            {
+                contatos.Add(new Contato
+                {
+                    Nome = cont.DisplayName,
+                    Numero = cont.Phones.FirstOrDefault()?.Number
+                });
+            }
+
+            MessagingCenter.Send<IContatoHelper, List<Contato>>(this, "obtercontatos", contatos);
         }
     }
 }

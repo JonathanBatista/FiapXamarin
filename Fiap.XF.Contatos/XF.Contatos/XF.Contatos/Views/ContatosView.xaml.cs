@@ -17,7 +17,6 @@ namespace XF.Contatos.Views
 		{
 			InitializeComponent ();
             loadContatos();
-
         }
 
         private async void loadContatos()
