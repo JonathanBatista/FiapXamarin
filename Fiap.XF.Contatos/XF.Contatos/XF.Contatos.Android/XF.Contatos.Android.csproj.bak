@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CCD671C5-99CB-4911-A48B-E0963CE94D4F}</ProjectGuid>
+    <ProjectGuid>{61ED399D-AD72-4C7E-A4DD-6EDB16098611}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>XF.Recursos.Droid</RootNamespace>
-    <AssemblyName>XF.Recursos.Android</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <RootNamespace>XF.Contatos.Droid</RootNamespace>
+    <AssemblyName>XF.Contatos.Android</AssemblyName>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -56,15 +56,9 @@
     <PackageReference Include="Xamarin.Android.Support.v4" Version="25.4.0.2" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="25.4.0.2" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
-    <PackageReference Include="xamstore-xamarin.mobile">
-      <Version>0.7.1</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FiapBoxViewRenderer.cs" />
-    <Compile Include="FiapButtonRenderer.cs" />
-    <Compile Include="GeoLocation_Android.cs" />
-    <Compile Include="Ligar_Android.cs" />
+    <Compile Include="AppResources\ContatoHelper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -92,16 +86,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XF.Recursos\XF.Recursos.csproj">
-      <Project>{30E1D190-A6DA-45B4-8F2C-618079A2F5F4}</Project>
-      <Name>XF.Recursos</Name>
+    <ProjectReference Include="..\XF.Contatos\XF.Contatos.csproj">
+      <Project>{9BAFE52E-F701-46A2-A315-A71CDD335C44}</Project>
+      <Name>XF.Contatos</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Engine.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
+using Android.Telephony;
 using Xamarin.Contacts;
 using Xamarin.Forms;
 using XF.Contatos.Droid.AppResources;
@@ -30,6 +32,35 @@ namespace XF.Contatos.Droid.AppResources
             return true;
         }
 
+        public bool LigarParaContato(Contato contato)
+        {
+            var context = MainApplication.CurrentContext as Activity;
+            if (context == null) return false;
+
+            var intent = new Intent(Intent.ActionCall);
+            intent.SetData(Android.Net.Uri.Parse("tel:" + contato.Numero));
+
+            if (IsIntentAvailable(context, intent))
+            {
+                context.StartActivity(intent);
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool IsIntentAvailable(Context context, Intent intent)
+        {
+            var packageManager = context.PackageManager;
+
+            var list = packageManager.QueryIntentServices(intent, 0)
+                .Union(packageManager.QueryIntentActivities(intent, 0));
+
+            if (list.Any()) return true;
+
+            var manager = TelephonyManager.FromContext(context);
+            return manager.PhoneType != Android.Telephony.PhoneType.None;
+        }
 
         private void publishList(List<Contact> contactList)
         {
@@ -40,7 +71,8 @@ namespace XF.Contatos.Droid.AppResources
                 contatos.Add(new Contato
                 {
                     Nome = cont.DisplayName,
-                    Numero = cont.Phones.FirstOrDefault()?.Number
+                    Numero = cont.Phones.FirstOrDefault()?.Number,
+                    Thumbnail = cont.GetThumbnail().ToArray<byte>()
                 });
             }
 

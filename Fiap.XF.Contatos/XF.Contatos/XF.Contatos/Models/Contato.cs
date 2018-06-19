@@ -5,5 +5,7 @@
         public string Nome { get; set; }
         
         public string Numero { get; set; }
+
+        public byte[] Thumbnail { get; set; }
     }
 }

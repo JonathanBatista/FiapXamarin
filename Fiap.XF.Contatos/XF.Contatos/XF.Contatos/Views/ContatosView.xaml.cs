@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XF.Contatos.Global;
+using XF.Contatos.Models;
+using XF.Contatos.ViewModels;
 
 namespace XF.Contatos.Views
 {
@@ -27,6 +29,10 @@ namespace XF.Contatos.Views
             if (!result)
                 await DisplayAlert("Oops!", "Você precisa conceder acessos ao seu celular p/ o app!", "Ok");                
         }
-        
+
+        void OnContatoTapped(object sender, ItemTappedEventArgs e) => 
+            ((ContatoViewModel)BindingContext).Discar((Contato)e.Item);
+
+
     }
 }

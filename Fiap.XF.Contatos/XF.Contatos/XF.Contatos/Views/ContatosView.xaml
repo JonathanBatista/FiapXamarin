@@ -4,10 +4,14 @@
              x:Class="XF.Contatos.Views.ContatosView">
     <ContentPage.Content>
         <ListView 
-            ItemsSource="{Binding ListaContatos}" >
+            ItemsSource="{Binding ListaContatos}"
+            ItemTapped="OnContatoTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                        <ViewCell.ContextActions>
+                            <ToolbarItem Text="Detalhes" />
+                        </ViewCell.ContextActions>
                         <StackLayout>
                             <Label Text="{Binding Nome}" />
                             <Label Text="{Binding Numero}" />
