@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Android;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.Telephony;
 using Xamarin.Contacts;
 using Xamarin.Forms;
@@ -20,8 +22,19 @@ namespace XF.Contatos.Droid.AppResources
         {
             var context = MainApplication.CurrentContext as Activity;
             if (context == null) return false;
-            var book = new AddressBook(context);
 
+            var idRequestCode = 0;
+
+            var contactsPermission = Manifest.Permission.ReadContacts;
+            string[] permissions = { contactsPermission };
+            
+
+            if (context.CheckSelfPermission(contactsPermission) != (int) Permission.Granted)
+            {
+                context.RequestPermissions(permissions, idRequestCode);
+            }
+
+            var book = new AddressBook(context);
             if (!await book.RequestPermission())
             {
                 Console.WriteLine("Permissão negada pelo usuário!");
