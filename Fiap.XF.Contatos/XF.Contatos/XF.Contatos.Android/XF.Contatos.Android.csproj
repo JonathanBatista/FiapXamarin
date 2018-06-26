@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>XF.Contatos.Droid</RootNamespace>
     <AssemblyName>XF.Contatos.Android</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -61,6 +61,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppResources\CameraHelper.cs" />
     <Compile Include="AppResources\ContatoHelper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
@@ -93,6 +94,9 @@
       <Project>{9BAFE52E-F701-46A2-A315-A71CDD335C44}</Project>
       <Name>XF.Contatos</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cameraicon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

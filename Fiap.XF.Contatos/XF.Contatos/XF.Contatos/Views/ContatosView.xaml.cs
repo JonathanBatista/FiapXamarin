@@ -33,6 +33,21 @@ namespace XF.Contatos.Views
         void OnContatoTapped(object sender, ItemTappedEventArgs e) => 
             ((ContatoViewModel)BindingContext).Discar((Contato)e.Item);
 
-
+        private void ListView_Refreshing(object sender, EventArgs e)
+        {
+            var lista = ((ListView)sender);
+            try
+            {
+                ((ContatoViewModel)BindingContext).PesquisarPorNome = null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                lista.EndRefresh();
+            }
+        }
     }
 }

@@ -6,6 +6,6 @@
         
         public string Numero { get; set; }
 
-        public byte[] Thumbnail { get; set; }
+        public byte[] ThumbnailBytes { get; set; }
     }
 }

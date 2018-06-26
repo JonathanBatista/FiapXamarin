@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.Telephony;
 using Xamarin.Contacts;
 using Xamarin.Forms;
@@ -23,26 +25,22 @@ namespace XF.Contatos.Droid.AppResources
             var context = MainApplication.CurrentContext as Activity;
             if (context == null) return false;
 
-            var idRequestCode = 0;
+            var contactsPermission = Manifest.Permission.ReadContacts;            
 
-            var contactsPermission = Manifest.Permission.ReadContacts;
-            string[] permissions = { contactsPermission };
-            
-
-            if (context.CheckSelfPermission(contactsPermission) != (int) Permission.Granted)
+            if (context.CheckSelfPermission(contactsPermission) == (int) Permission.Granted)
             {
-                context.RequestPermissions(permissions, idRequestCode);
+                var book = new AddressBook(context);
+                if (!await book.RequestPermission())
+                {
+                    Console.WriteLine("Permissão negada pelo usuário!");
+                    return false;
+                }
+
+                publishList(book.ToList());
+                return true;
             }
 
-            var book = new AddressBook(context);
-            if (!await book.RequestPermission())
-            {
-                Console.WriteLine("Permissão negada pelo usuário!");
-                return false;
-            }
-
-            publishList(book.ToList());
-            return true;
+            return false;
         }
 
         public bool LigarParaContato(Contato contato)
@@ -79,13 +77,27 @@ namespace XF.Contatos.Droid.AppResources
         {
             var contatos = new List<Contato>();
 
+            
             foreach (var cont in contactList)
             {
+                byte[] thumb = { };
+                var contThumbnail = cont.GetThumbnail();
+
+                if (contThumbnail != null)
+                {
+                    using (var memStream = new MemoryStream())
+                    {
+                        Bitmap scaledThumb = Bitmap.CreateScaledBitmap(cont.GetThumbnail(), 1200, 1200, true);
+                        scaledThumb.Compress(Bitmap.CompressFormat.Jpeg, 50, memStream);
+                        thumb = memStream.ToArray();
+                    }
+                }               
+                
                 contatos.Add(new Contato
                 {
                     Nome = cont.DisplayName,
                     Numero = cont.Phones.FirstOrDefault()?.Number,
-                    Thumbnail = cont.GetThumbnail().ToArray<byte>()
+                    ThumbnailBytes = thumb
                 });
             }
 
