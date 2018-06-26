@@ -9,6 +9,9 @@ using Android.OS;
 using Android;
 using System.Linq;
 using Android.Content;
+using Android.Graphics;
+using System.IO;
+using Android.Provider;
 
 namespace XF.Contatos.Droid
 {
@@ -57,6 +60,24 @@ namespace XF.Contatos.Droid
             
             if (requestCode == 1001 && resultCode == Result.Ok)
             {
+
+               
+                //File file = new File(Android.OS.Environment.GetExternalStoragePublicDirectory().getPath(), "photo.jpg");
+                try
+                {
+                    Bitmap bitmap = MediaStore.Images.Media.GetBitmap(this.ContentResolver, data.Data);
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        bitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, stream);
+                        byte[] array = stream.ToArray();
+                    }
+
+                }
+                catch (Java.IO.IOException e)
+                {
+                    //Exception Handling
+                }
+
                 var arrayBytes = data.Extras.GetByteArray("MediaFile");
 
                 var path = data.Extras.GetString("path");
@@ -65,8 +86,10 @@ namespace XF.Contatos.Droid
             }
 
 
-           // base.OnActivityResult(requestCode, resultCode, data);           
             
+
+            // base.OnActivityResult(requestCode, resultCode, data);           
+
         }
     }
 }
