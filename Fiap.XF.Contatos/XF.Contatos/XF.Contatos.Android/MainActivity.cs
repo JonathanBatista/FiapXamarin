@@ -12,6 +12,11 @@ using Android.Content;
 using Android.Graphics;
 using System.IO;
 using Android.Provider;
+using Xamarin.Media;
+using Xamarin.Forms;
+using XF.Contatos.Global;
+using XF.Contatos.Droid.AppResources;
+using Java.Nio;
 
 namespace XF.Contatos.Droid
 {
@@ -25,7 +30,7 @@ namespace XF.Contatos.Droid
                 Manifest.Permission.CallPhone,
                 Manifest.Permission.Camera,
                 Manifest.Permission.AccessCoarseLocation,
-                Manifest.Permission.AccessFineLocation, 
+                Manifest.Permission.AccessFineLocation,
                 Manifest.Permission.WriteExternalStorage
             };
 
@@ -35,14 +40,14 @@ namespace XF.Contatos.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             var requestId = new Random().Next(int.MaxValue);
             this.RequestPermissions(permissions, requestId);
         }
-        
-        
+
+
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
@@ -54,43 +59,36 @@ namespace XF.Contatos.Droid
             return;
         }
 
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        protected async override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
+            base.OnActivityResult(requestCode, resultCode, data);
             var keys = data.Extras.KeySet();
-            
-            if (requestCode == 1001 && resultCode == Result.Ok)
+
+            if (requestCode == 800 && resultCode == Result.Ok)
             {
-
-               
-                //File file = new File(Android.OS.Environment.GetExternalStoragePublicDirectory().getPath(), "photo.jpg");
-                try
+                MediaFile file = await data.GetMediaFileExtraAsync(this);
+                Stream st = file.GetStream();
+                byte[] array;
+                using (MemoryStream stream = new MemoryStream())
                 {
-                    Bitmap bitmap = MediaStore.Images.Media.GetBitmap(this.ContentResolver, data.Data);
-                    using (MemoryStream stream = new MemoryStream())
+                    st.CopyTo(stream);
+                    Bitmap bmp = Bitmap.CreateBitmap(1200, 1200, Bitmap.Config.Argb8888);
+                    bmp.Compress(Bitmap.CompressFormat.Jpeg, 50, stream);
+                    array = stream.ToArray();
+
+                    var novoBmp = Bitmap.CreateScaledBitmap(BitmapFactory.DecodeByteArray(array, 0, array.Length), 1200, 1200, false);
+
+                    using (var newStream = new MemoryStream())
                     {
-                        bitmap.Compress(Bitmap.CompressFormat.Jpeg, 100, stream);
-                        byte[] array = stream.ToArray();
+                        novoBmp.Compress(Bitmap.CompressFormat.Jpeg, 50, newStream);
+                        array = newStream.ToArray();
                     }
-
-                }
-                catch (Java.IO.IOException e)
-                {
-                    //Exception Handling
                 }
 
-                var arrayBytes = data.Extras.GetByteArray("MediaFile");
-
-                var path = data.Extras.GetString("path");
-                var action = data.Extras.Get("action");
-                var isphoto = data.Extras.GetBoolean("IsPhoto");
+                MessagingCenter.Send<ICameraHelper, byte[]>(new CameraHelper(), "obternovaimagem", array);
             }
-
-
-            
-
-            // base.OnActivityResult(requestCode, resultCode, data);           
-
         }
+
     }
 }
 

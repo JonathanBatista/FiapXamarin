@@ -79,6 +79,17 @@ namespace XF.Contatos.ViewModels
                     ContatosFiltrados = contatos.OrderBy(x => x.Nome).ToList();
                     AplicarFiltro();
                 });
+
+
+            MessagingCenter.Subscribe<ICameraHelper, byte[]>(this, "obternovaimagem",
+                (sender, newImage) =>
+                {
+                    if (ContatoSelecionado != null)
+                    {
+                        ContatoSelecionado.ThumbnailBytes = newImage;
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ContatoSelecionado)));
+                    }
+                });
         }
 
         private void AplicarFiltro()

@@ -10,6 +10,7 @@ using Android.Provider;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.IO;
 using Xamarin.Forms;
 using Xamarin.Media;
 using XF.Contatos.Droid.AppResources;
@@ -28,38 +29,27 @@ namespace XF.Contatos.Droid.AppResources
 
             var picker = new MediaPicker(context);
             if (!picker.IsCameraAvailable)
-                Console.WriteLine("No camera!");
+                System.Console.WriteLine("No camera!");
             else
             {
                 try
                 {
+                    string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                     var file = picker.GetTakePhotoUI(new StoreCameraMediaOptions
                     {                        
                         Name = "test.jpg",
-                        Directory = Android.OS.Environment.DirectoryPictures
+                        Directory = $"~{path}"
                     });
-
-                    Uri uri = new Uri($"file:///sdcard/photo.jpg");
-                    file.PutExtra(MediaStore.ExtraOutput, "file:///sdcard/photo.jpg");
-
-                    context.StartActivityForResult(file, 1001);
+                    context.StartActivityForResult(file, 800);
                     return true;
                 }
                 catch (System.OperationCanceledException)
                 {
-                    Console.WriteLine("Canceled");
+                    System.Console.WriteLine("Canceled");
                 }
             }
 
             return false;
         }
-
-        /*
-         Intent intent = new Intent (MediaStore.ActionImageCapture);
-    App._file = new File (App._dir, String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
-    intent.PutExtra (MediaStore.ExtraOutput, Uri.FromFile (App._file));
-    StartActivityForResult (intent, 0);
-         
-         */
     }
 }

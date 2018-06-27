@@ -18,7 +18,8 @@
                 </Grid.RowDefinitions>
 
                 <Image Grid.Row="0" Grid.Column="0"
-                    HorizontalOptions="FillAndExpand" 
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="StartAndExpand"
                     Source="{Binding ContatoSelecionado.ThumbnailBytes, Converter={StaticResource ByteArrayToImage}}" />
                 <Grid Padding="5"
                     Grid.Row="0" Grid.Column="0" 
