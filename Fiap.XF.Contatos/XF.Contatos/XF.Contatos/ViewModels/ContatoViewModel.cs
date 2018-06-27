@@ -38,12 +38,15 @@ namespace XF.Contatos.ViewModels
         public ICommand OnDiscarContatoCmd { get; private set; }
 
         public ICommand OnTakePhotoCmd { get; private set; }
+
+        public ICommand OnVerMapaCmd { get; private set; }
         public ContatoViewModel()
         {
             CarregarContatos();
             OnContatoDetalhesCmd = new Command<Contato>(ExibirDetalhes);
             OnDiscarContatoCmd = new Command<Contato>(Discar);
             OnTakePhotoCmd = new Command(TirarFoto);
+            OnVerMapaCmd = new Command(ExibirLocalizacao);
         }
 
         
@@ -64,6 +67,14 @@ namespace XF.Contatos.ViewModels
                 contatoHelper.LigarParaContato(contato);           
             }
         }
+
+
+        private async void ExibirLocalizacao()
+        {
+            var locationHelper = DependencyService.Get<IMapaHelper>();
+            await locationHelper.AbrirLocalizacao();
+        }
+
 
         private void TirarFoto()
         {

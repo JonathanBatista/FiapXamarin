@@ -15,6 +15,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />                    
                 </Grid.RowDefinitions>
 
                 <Image Grid.Row="0" Grid.Column="0"
@@ -39,6 +40,9 @@
                             HorizontalOptions="End" VerticalOptions="Center"
                             Command="{Binding BindingContext.OnTakePhotoCmd, Source={x:Reference pageContatoDetalhe}}"/>
                 </Grid>
+                <Button Grid.Column="0" Grid.Row="1" HorizontalOptions="FillAndExpand" 
+                        Text="Ver no Mapa" 
+                        Command="{Binding OnVerMapaCmd}" />
             </Grid>            
         </StackLayout>
     </ContentPage.Content>
